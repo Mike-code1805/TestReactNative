@@ -78,23 +78,29 @@ const App = () => {
 
   const scanDevices = useCallback(() => {
     setLoading(true);
+    console.log('IM IN scanDevices');
     BluetoothManager.scanDevices().then(
       s => {
         // const pairedDevices = s.paired;
-        var found = s.found;
+        var found = JSON.parse(s).found;
+        console.log('IM IN FOUND', {s});
+        console.log(JSON.parse(s));
         try {
           found = JSON.parse(found); //@FIX_it: the parse action too weired..
         } catch (e) {
           //ignore
         }
+        console.log({foundDs});
         var fds = foundDs;
         if (found && found.length) {
           fds = found;
         }
+        console.log({fds});
         setFoundDs(fds);
         setLoading(false);
       },
       er => {
+        console.log('IM IN ERROR');
         setLoading(false);
         // ignore
       },
@@ -253,7 +259,7 @@ const App = () => {
       scan();
     }
   }, [boundAddress, deviceAlreadPaired, deviceFoundEvent, pairedDevices, scan]);
-
+  console.log({pairedDevices});
   return (
     <ScrollView style={styles.container}>
       <View style={styles.bluetoothStatusContainer}>

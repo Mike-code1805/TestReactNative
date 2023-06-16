@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import {BluetoothEscposPrinter} from 'react-native-bluetooth-escpos-printer';
-import {hsdLogo} from './dummy-logo';
+import {hsdLogo, logo} from './dummy-logo';
 
 const SamplePrint = () => {
   return (
@@ -61,8 +61,8 @@ const SamplePrint = () => {
           onPress={async () => {
             let columnWidths = [8, 20, 20];
             try {
-              await BluetoothEscposPrinter.printText('\r\n\r\n\r\n', {});
-              await BluetoothEscposPrinter.printPic(hsdLogo, {
+              await BluetoothEscposPrinter.printText('\r\n\r\n', {});
+              await BluetoothEscposPrinter.printPic(logo, {
                 width: 250,
                 left: 150,
               });
@@ -92,7 +92,7 @@ const SamplePrint = () => {
                   BluetoothEscposPrinter.ALIGN.RIGHT,
                 ],
                 ['Customer', 'Prawito Hudoro'],
-                {},
+                {widthtimes: 1},
               );
               await BluetoothEscposPrinter.printColumn(
                 [24, 24],
@@ -229,8 +229,8 @@ const SamplePrint = () => {
                 '================================================',
                 {},
               );
-              await BluetoothEscposPrinter.printText('\r\n\r\n\r\n', {});
-              await BluetoothEscposPrinter.printText('\r\n\r\n\r\n', {});
+              await BluetoothEscposPrinter.printText('\r\n\r\n', {});
+              await BluetoothEscposPrinter.printText('\r\n\r\n', {});
             } catch (e) {
               alert(e.message || 'ERROR');
             }
